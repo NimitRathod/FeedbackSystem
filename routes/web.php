@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('admin.templates.child');
 });
+
+Route::resource('department', 'admin\DepartmentsController');
+
+Route::resource('program', 'admin\ProgramsController');

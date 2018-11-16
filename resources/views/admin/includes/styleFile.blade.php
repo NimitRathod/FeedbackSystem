@@ -7,10 +7,4 @@
 <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/pe-icon-7-filled.css') }}">
 
-
-<link href="{{ asset('assets/weather/css/weather-icons.css') }}" rel="stylesheet" />
-<link href="{{ asset('assets/calendar/fullcalendar.css') }}" rel="stylesheet" />
-
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-<link href="{{ asset('assets/css/charts/chartist.min.css') }}" rel="stylesheet"> 
-<link href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
