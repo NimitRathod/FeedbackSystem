@@ -2,7 +2,8 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <title>FeedbackSystem @yield('title')</title>
 
@@ -11,26 +12,28 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     @yield('style')
 </head>
-<body>
-    @include('admin.includes.leftPanel')
+<body class="vertical-layout vertical-compact-menu 2-columns menu-expanded fixed-navbar"
+data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+@include('admin.includes.leftPanel')
 
-    <!-- Right Panel --> 
-    <div id="right-panel" class="right-panel">
+<!-- Center Panel --> 
+<div class="app-content content">
+    <div class="content-wrapper">
 
         @include('admin.includes.headerPanel')
 
-        @include('admin.templates.widgets.breadcrumbs')
 
         @yield('content')
 
         <div class="clearfix"></div>
 
-        @include('admin.includes.footerPanel')
     </div>
-    <!-- /#right-panel -->
+</div>
+<!-- Center Panel -->
+@include('admin.includes.footerPanel')
 
-    @include('admin.includes.scriptFile')
-    @yield('scriptFile')
-    @yield('footerScript')
+@include('admin.includes.scriptFile')
+@yield('scriptFile')
+@yield('footerScript')
 </body>
 </html>

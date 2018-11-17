@@ -1,22 +1,28 @@
 @extends('admin.layouts.app')
 
 @section('title')
+{{-- Set The Title Like Department  --}}
 - <?php echo ucfirst(explode(".",Request::route()->getName())[0]); ?>
 @endsection
 
 @section('styleFile')
 {{-- style Files --}}
-<link rel="stylesheet" href="{{ asset('assets/css/flag-icon.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/cs-skin-elastic.css') }}">
-<link href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="assets/css/flag-icon.min.css">
+<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+<!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 @endsection
 
 @section('style')
 {{-- style code --}}
-@endsection
 
+@endsection
 @section('content')
+
 <div class="content">
     <div class="animated fadeIn">
         <div class="row">
@@ -390,20 +396,30 @@
     </div><!-- .animated -->
 </div><!-- .content -->
 
-<div class="clearfix"></div>
 @endsection
 
 @section('scriptFile')
-<script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/datatables-init.js') }}"></script>
+<script src="assets/js/lib/data-table/datatables.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/jszip.min.js"></script>
+<script src="assets/js/lib/data-table/pdfmake.min.js"></script>
+<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="assets/js/lib/data-table/datatables-init.js"></script>
+
 @endsection
 
 @section('footerScript')
 <script type="text/javascript">
     $(document).ready(function() {
-      $('#bootstrap-data-table-export').DataTable();
-  } );
+        
+        
+        $('#bootstrap-data-table-export').DataTable();
+
+    } );
 </script>
 @endsection
