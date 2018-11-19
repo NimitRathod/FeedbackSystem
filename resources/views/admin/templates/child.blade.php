@@ -6,6 +6,7 @@
 
 @section('styleFile')
 {{-- style Files --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/cryptocoins/cryptocoins.css') }}">
 @endsection
 
 @section('style')
@@ -61,7 +62,7 @@
 
 @section('scriptFile')
 <!-- BEGIN PAGE LEVEL JS-->
-<script src="{{ asset('app-assets/js/scripts/pages/dashboard-sales.js') }}" type="text/javascript"></script>
+<script src="{{ asset('app-assets/js/scripts/pages/dashboard-crypto.js') }}" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
 @endsection
 
