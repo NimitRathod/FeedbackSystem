@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Model\Department;
+use Illuminate\Support\Facades\Validator;
 class DepartmentsController extends Controller
 {
     /**
@@ -14,7 +16,9 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
-        return view('admin.templates.department.index');
+        $departments = Department::all();
+        return view('admin.templates.department.index')
+        ->with(compact('departments'));
     }
 
     /**
@@ -35,8 +39,27 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        echo $request->all();
-        exit();
+        // print_r($request->all());
+        $validator = Validator::make($request->all(), [
+            'department_name' => 'required|regex:/^[A-Za-z\s-_]+$/|unique:departments|max:255',
+            ]);
+        if ($validator->fails()) {
+            // print_r($validator);
+            // exit();
+            return redirect('department')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        print_r($request->all());
+
+        Department::create($request->all());
+
+        return redirect()->route('department.index')
+                        ->with('success','Department created successfully')
+                        ->with(['menu'=>'role']);
+
+
+        // exit();
     }
 
     /**
