@@ -35,7 +35,8 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo $request->all();
+        exit();
     }
 
     /**
