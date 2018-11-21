@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('admin.templates.child');
+	return view('student.templates.child');
 });
 
-Route::resource('department', 'admin\DepartmentsController');
+Route::group(['prefix' => 'admin'],function(){
+	Route::get('/', function () {
+		return view('admin.templates.child');
+	});
+	Route::resource('department', 'admin\DepartmentsController');
 
-Route::resource('program', 'admin\ProgramsController');
+	Route::resource('program', 'admin\ProgramsController');
+});

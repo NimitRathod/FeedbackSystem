@@ -82,8 +82,14 @@
                             <tr>
                                 <td>{{ $department->department_name }}</td>
                                 <td>
-                                    <a href="#edit-{{ $department->id}}" class="btn btn-sm">Edit</a>
-                                    <a href="#delete-{{ $department->id}}" class="btn btn-sm">Delete</a>
+                                    <a href="{{ route('department.edit',[$department->id]) }}" class="btn btn-md btn-outline-primary">
+                                        <i class="ft-edit-3"></i>
+                                        Edit
+                                    </a>
+                                    <a href="{{ route('department.destroy',[$department->id]) }}" class="btn btn-md btn-outline-warning">
+                                        <i class="la la-exclamation-circle"></i>
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

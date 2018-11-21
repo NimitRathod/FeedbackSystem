@@ -1,0 +1,13 @@
+Usefull Camand
+
+https://itsolutionstuff.com/post/laravel-5-clear-cache-from-route-view-config-and-all-cache-data-from-applicationexample.html
+	1) Reoptimized class loader:
+		php artisan optimize
+	2) Clear Cache facade value:
+		php artisan cache:clear
+	3) Clear Route cache:
+		php artisan route:cache
+	4) Clear View cache:
+		php artisan view:clear
+	5) Clear Config cache:
+		php artisan config:cache

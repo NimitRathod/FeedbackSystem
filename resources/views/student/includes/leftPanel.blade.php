@@ -3,7 +3,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item">
-                <a class="dropdown-item" href="{{ url('/admin') }}">
+                <a class="dropdown-item" href="{{ url('') }}">
                     <i class="la la-home"></i>
                     Dashboard
                 </a>
@@ -20,13 +20,13 @@
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{ route('department.index') }}" data-i18n="nav.dash.ecommerce">
+                        <a class="menu-item" href="{{ url('/department') }}" data-i18n="nav.dash.ecommerce">
                             <i class="la la-home"></i>
                             Department
                         </a>
                     </li>
                     <li>
-                        <a class="menu-item" href="{{ route('program.index') }}" data-i18n="nav.dash.crypto">
+                        <a class="menu-item" href="{{ url('/program') }}" data-i18n="nav.dash.crypto">
                             <i class="la la-leanpub"></i>
                             Program
                         </a>

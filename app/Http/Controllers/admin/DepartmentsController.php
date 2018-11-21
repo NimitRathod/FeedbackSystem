@@ -81,7 +81,9 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo $id;
+        $department_edit = Department::findOrFail($id);
+        print_r($department_edit);
     }
 
     /**
@@ -104,6 +106,6 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo $id;
     }
 }
