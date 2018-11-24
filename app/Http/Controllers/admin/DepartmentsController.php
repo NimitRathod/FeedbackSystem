@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Model\Department;
 use Illuminate\Support\Facades\Validator;
+use DataTables;
+
 class DepartmentsController extends Controller
 {
     /**
@@ -16,9 +18,9 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
-        return view('admin.templates.department.index')
-        ->with(compact('departments'));
+        // $departments = Department::all();
+        return view('admin.templates.department.index');
+        // ->with(compact('departments'));
     }
 
     /**
@@ -41,22 +43,24 @@ class DepartmentsController extends Controller
     {
         // print_r($request->all());
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required|regex:/^[A-Za-z\s-_]+$/|unique:departments|max:255',
-            ]);
+            'department_name' => 'required|unique:departments|max:255',
+        ]);
+
         if ($validator->fails()) {
             // print_r($validator);
             // exit();
-            return redirect('department')
+            return redirect()->route('department.index')
             ->withErrors($validator)
             ->withInput();
         }
+
         print_r($request->all());
 
         Department::create($request->all());
 
         return redirect()->route('department.index')
-                        ->with('success','Department created successfully')
-                        ->with(['menu'=>'role']);
+                        // ->with('success','Department created successfully')
+        ->with(['menu'=>'role']);
 
 
         // exit();
@@ -81,9 +85,10 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-        echo $id;
+
         $department_edit = Department::findOrFail($id);
-        print_r($department_edit);
+        $departments = Department::all();
+        return view('admin.templates.department.index',compact(['department_edit','departments']));
     }
 
     /**
@@ -107,5 +112,19 @@ class DepartmentsController extends Controller
     public function destroy($id)
     {
         echo $id;
+    }
+
+    public function getDataTable()
+    {
+        $departments = Department::all();
+        return DataTables::of($departments)
+        ->addColumn('edit',function ($department){
+            return '<button type="button" class="edit btn btn-sm btn-primary" data-department-name="'.$department->department_name.'" data-id="'.$department->id.'">Edit</button>';
+        })
+        ->addColumn('delete',function ($department){
+            return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="'.$department->id.'" data-token="'.csrf_token().'" >Delete</button>';
+        })
+        ->rawColumns(['edit','delete'])
+        ->make(true);
     }
 }

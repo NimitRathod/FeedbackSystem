@@ -23,9 +23,7 @@
 
 @include('admin.templates.widgets.breadcrumbs')
 <div class="content-body">
-
-    @include('admin.templates.widgets.error')
-    {{-- @include('admin.templates.widgets.success') --}}
+    @include('admin.templates.widgets.error') 
     <section id="configuration">
         <div class="row">
             <div class="col-12">
@@ -34,103 +32,114 @@
                         {{-- <h4 class="card-title">Configuration option</h4> --}}
                         <div class="col-md-2 col-sm-2 col-4 "> 
                             <h5 class="card-title">
-                                <button class="btn btn-xs btn-block btn-outline-cyan mb-1 onblock-callback" data-toggle="modal" data-backdrop="false" data-target="#departmentAdd">
+                                <button class="btn btn-xs btn-block btn-outline-cyan mb-1 onblock-callback" data-toggle="modal" data-backdrop="false" data-target="#addmodel">
                                     <i class="ft-plus"></i>
                                     Add    
                                 </button>
                             </h5>
                         </div>                        
-                        <a class="heading-elements-toggle">
+                        {{-- <a class="heading-elements-toggle">
                             <i class="la la-ellipsis-v font-medium-3"></i>
                         </a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
-                                {{-- <li>
-                                <a data-action="collapse">
-                                    <i class="ft-minus"></i>
-                                </a>
-                            </li> --}}
-                            <li>
-                                <a data-action="reload">
-                                    <i class="ft-rotate-cw"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-action="expand">
-                                    <i class="ft-maximize"></i>
-                                </a>
-                            </li>
-                            {{-- <li>
-                            <a data-action="close">
-                                <i class="ft-x"></i>
-                            </a>
-                        </li> --}}
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content collapse show">
-                <div class="card-body card-dashboard">
-                    <table class="table table-striped table-bordered dataex-res-configuration">
-                        <thead>
-                            <tr>
-                                <th>Department Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($departments as $key => $department)
-                            <tr>
-                                <td>{{ $department->department_name }}</td>
-                                <td>
-                                    <a href="{{ route('department.edit',[$department->id]) }}" class="btn btn-md btn-outline-primary">
-                                        <i class="ft-edit-3"></i>
-                                        Edit
+                                <li>
+                                    <a data-action="collapse">
+                                        <i class="ft-minus"></i>
                                     </a>
-                                    <a href="{{ route('department.destroy',[$department->id]) }}" class="btn btn-md btn-outline-warning">
-                                        <i class="la la-exclamation-circle"></i>
-                                        Delete
+                                </li>
+                                <li>
+                                    <a data-action="reload">
+                                        <i class="ft-rotate-cw"></i>
                                     </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                </li>
+                                <li>
+                                    <a data-action="expand">
+                                        <i class="ft-maximize"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-action="close">
+                                        <i class="ft-x"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> --}}
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body  card-dashboard">
+                            <table class="table table-striped table-bordered dynamic-table">
+                                <thead>
+                                    <tr>
+                                        <th>Department Name</th>
+                                        <th width="100px;">Edit</th>
+                                        <th width="100px;">Delete</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</section>
-<section id="modal-themes">
-    <div class="modal fade text-left" id="departmentAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+    </section>
+
+    <div class="modal fade text-left" id="addmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content border-cyan">
-                <div class="modal-header bg-cyan white">
+                <div class="modal-header bg-tea lwhite">
                     <h4 class="modal-title white" id="myModalLabel8">Add Department</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('department.store') }}">
+
+                <form method="POST" action="/admin/department" id="formDepartmentAdd" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <label>Department Name: </label>
                         <div class="form-group position-relative has-icon-left">
-                            <input type="text" name="department_name" placeholder="Department Name" class="form-control">
-                            {{-- <div class="form-control-position">
-                            <i class="la la-envelope font-medium-5 line-height-1 text-muted icon-align"></i>
-                        </div> --}}
+                            <input type="text" name="department_name" placeholder="Department Name" class="form-control" value="">
+                        </div>
                     </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn grey btn-outline-warning" data-dismiss="modal" value="Close">
+                        <input type="submit" class="btn btn-outline-success" value="Add">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>  
+
+    <div class="modal fade text-left" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content border-cyan">
+                <div class="modal-header bg-tea lwhite">
+                    <h4 class="modal-title white" id="myModalLabel8">Add Department</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn grey btn-outline-warning" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-cyan">Submit</button>
-                </div>
-            </form>
+
+                <form method="POST" action="/admin/department" id="editform" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
+                    <div class="modal-body">
+                        <label>Department Name: </label>
+                        <div class="form-group position-relative has-icon-left">
+                            <input type="text" class="form-control" required="true" id="department_name" name="department_name" placeholder="Enter Department Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="Close">
+                        <input type="submit" class="btn btn-outline-primary btn-lg" value="Update">
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
-</div>   
-</section>
 </div>
 @endsection
 
@@ -146,12 +155,77 @@
 <!-- END PAGE VENDOR JS-->
 
 <!-- BEGIN PAGE LEVEL JS-->
-<script src="{{ asset('app-assets/js/scripts/tables/datatables-extensions/datatable-responsive.js') }}" type="text/javascript"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/validation/jquery.validate.min.js')}}" type="text/javascript"></script>
+<script src="../../../app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
+<script src="../../../app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL JS-->
 @endsection
 
 @section('footerScript')
 <script type="text/javascript">
 
+    var mytable;
+
+    /* RETRIVE DATA For Editing Purpose */
+    $(document).on('click', '.edit', function () {
+
+        var id = $(this).data("id");
+        var department_name = $(this).data("department_name");
+
+        $('#editform #department_name').val(department_name);
+        $('#editform').attr('action', '/admin/department/' + id);
+        $('#editmodel').modal('show');
+    });
+
+    $(document).ready(function (e) {
+        mytable = $('.dynamic-table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "ajax": "{{ url('admin/department/getDataTable') }}",
+            columns: [
+            {data: "department_name"},
+            {data: "edit"},
+            {data: "delete"}
+            ]
+        });
+
+        /* ADD Record using AJAX Requres */
+        var addformValidator = $("#formDepartmentAdd").validate({
+            ignore: ":hidden",
+            errorElement: "span",
+            errorClass: "text-danger",
+            validClass: "text-success",
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass);
+                $(element.form).find("span[id=" + element.id + "-error]").addClass(errorClass);
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass);
+                $(element.form).find("span[id=" + element.id + "-error]").removeClass(errorClass);
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    type: "POST",
+                    url: $(form).attr('action'),
+                    method: $(form).attr('method'),
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        $('#addmodel').modal('hide');
+                        swal("Good job!", "Your Record ", "success");
+                        $(form).trigger('reset');
+                        mytable.draw();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        var response = JSON.parse(XMLHttpRequest.responseText);
+                        addformValidator.showErrors(response.errors);
+                    }
+                });
+                return false; // required to block normal submit since you used ajax
+            }
+        });
+    });
 </script>
 @endsection
+

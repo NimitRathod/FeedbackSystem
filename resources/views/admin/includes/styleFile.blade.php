@@ -6,6 +6,7 @@ rel="stylesheet">
 rel="stylesheet">
 <!-- BEGIN VENDOR CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/vendors.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert.css') }}">
 <!-- END VENDOR CSS-->
 <!-- BEGIN MODERN CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/app.css') }}">

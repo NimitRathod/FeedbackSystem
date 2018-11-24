@@ -15,9 +15,13 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'],function(){
+	
 	Route::get('/', function () {
 		return view('admin.templates.child');
 	});
+	
+	// For Department Route
+	Route::get('department/getDataTable','admin\DepartmentsController@getDataTable');
 	Route::resource('department', 'admin\DepartmentsController');
 
 	Route::resource('program', 'admin\ProgramsController');
