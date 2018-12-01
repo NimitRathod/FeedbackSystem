@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title')
-{{-- Set The Title Like Program  --}}
+{{-- Set The Title Like classes  --}}
 - <?php echo ucfirst(explode(".",Request::route()->getName())[0]); ?>
 @endsection
 
@@ -72,7 +72,8 @@
                             <table class="table table-striped table-bordered dynamic-table">
                                 <thead>
                                     <tr>
-                                        <th>Program Name</th>
+                                        <th>Classes Name</th>
+                                        <th>Semester</th>
                                         <th width="100px;">Edit</th>
                                         <th width="100px;">Delete</th>
                                     </tr>
@@ -89,28 +90,36 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content border-cyan">
                 <div class="modal-header bg-cyan white">
-                    <h4 class="modal-title white" id="myModalLabel8">Add Program</h4>
+                    <h4 class="modal-title white" id="myModalLabel8">Add Classes</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form method="POST" action="/admin/program" id="programAdd" enctype="multipart/form-data">
+                <form method="POST" action="/admin/classes" id="classesAdd" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Select Department: </label>
-                            <select class="select2-size-lg form-control" id="department_id" name="department_id">
-                                @foreach($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                            <label>Select Program: </label>
+                            <select class="select2-size-lg form-control" id="program_id" name="program_id">
+                                @foreach($programs as $program)
+                                <option value="{{ $program->id }}">{{ $program->program_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Program Name: </label>
+                            <label>classes Name: </label>
                             <div class="form-group position-relative has-icon-left">
-                                <input type="text" name="program_name" placeholder="Program Name" class="form-control" value="">
+                                <input type="text" name="class_name" placeholder="Class Name" class="form-control" value="">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Semester: </label>
+                            <select class="select2-size-lg form-control" id="semester" name="semester">
+                                @for($i = 1; $i <= 6; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -127,7 +136,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content border-primary">
                 <div class="modal-header bg-primary white">
-                    <h4 class="modal-title white" id="myModalLabel8">Update Program Name</h4>
+                    <h4 class="modal-title white" id="myModalLabel8">Update Classes Name</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -138,18 +147,26 @@
                     <input type="hidden" name="_method" value="PATCH">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Select Department: </label>
-                            <select class="select2-size-lg form-control" id="department_id" name="department_id">
-                                @foreach($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                            <label>Select Program: </label>
+                            <select class="select2-size-lg form-control" id="program_id" name="program_id">
+                                @foreach($programs as $program)
+                                <option value="{{ $program->id }}">{{ $program->program_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Program Name: </label>
+                            <label>Classes Name: </label>
                             <div class="form-group position-relative has-icon-left">
-                                <input type="text" class="form-control" required="true" id="program_name" name="program_name" placeholder="Enter Program Name">
+                                <input type="text" class="form-control" required="true" id="class_name" name="class_name" placeholder="Enter Class Name">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Semester: </label>
+                            <select class="select2-size-lg form-control" id="semester" name="semester">
+                                @for($i = 1; $i <= 6; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -217,7 +234,7 @@
             if (isConfirm) {
                 $.ajax(
                 {
-                    url: "/admin/program/" + id,
+                    url: "/admin/classes/" + id,
                     type: 'POST',
                     data: {
                         "id": id,
@@ -243,12 +260,15 @@
     $(document).on('click', '.edit', function () {
 
         var id = $(this).data("id");
-        var program_name = $(this).data("programs-name");
-        var department_id = $(this).data("department_id");
+        var class_name = $(this).data("classe-name");
+        var program_id = $(this).data("program_id");
+        var semester = $(this).data("semester");
 
-        $('#editform #program_name').val(program_name);
-        $('#editform #department_id').val(department_id);
-        $('#editform').attr('action', '/admin/program/' + id);
+
+        $('#editform #class_name').val(classes_name);
+        $('#editform #program_id').val(program_id);
+        $('#editform #semester').val(semester);
+        $('#editform').attr('action', '/admin/classes/' + id);
         $('#editmodel').modal('show');
     });
 
@@ -257,16 +277,17 @@
             "processing": true,
             "serverSide": true,
             "responsive": true,
-            "ajax": "{{ url('admin/program/getDataTable') }}",
+            "ajax": "{{ url('admin/classes/getDataTable') }}",
             columns: [
-            {data: "program_name"},
+            {data: "class_name"},
+            {data: "semester"},
             {data: "edit"},
             {data: "delete"}
             ]
         });
 
         /* ADD Record using AJAX Requres */
-        var addformValidator = $("#programAdd").validate({
+        var addformValidator = $("#classesAdd").validate({
             ignore: ":hidden",
             errorElement: "span",
             errorClass: "text-danger",

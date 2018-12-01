@@ -2,8 +2,8 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow " data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item">
-                <a class="dropdown-item" href="{{ url('/admin') }}">
+            <li class=" nav-item @if($menu == '') {{ 'active' }}@endif">
+                <a class="dropdown-item" href="{{ url('/admin') }} ">
                     <i class="la la-home"></i>
                     Dashboard
                 </a>
@@ -11,7 +11,7 @@
             <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Academic</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
             </li>
-            <li class=" nav-item">
+            <li class=" nav-item @if($menu == 'department' || $menu == 'program') {{ 'active' }}@endif">
                 <a href="#">
                     <i class="la la-bank"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">
@@ -19,20 +19,20 @@
                     </span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('department.index') }}" data-i18n="nav.dash.ecommerce">
+                    <li class="@if($menu == 'department') {{ 'active' }}@endif">
+                        <a class="menu-item" href="{{ route('department.index') }}" data-i18n="department.index" >
                             <i class="la la-home"></i>
                             Department
                         </a>
                     </li>
-                    <li>
+                    <li class="@if($menu == 'program') {{ 'active' }}@endif">
                         <a class="menu-item" href="{{ route('program.index') }}" data-i18n="nav.dash.crypto">
                             <i class="la la-leanpub"></i>
                             Program
                         </a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="#Classes" data-i18n="nav.dash.crypto">
+                    <li class="@if($menu == 'classes') {{ 'active' }}@endif">
+                        <a class="menu-item" href="{{ route('classes.index') }}" data-i18n="nav.dash.crypto">
                             Classes
                         </a>
                     </li>

@@ -24,5 +24,11 @@ Route::group(['prefix' => 'admin'],function(){
 	Route::get('department/getDataTable','admin\DepartmentsController@getDataTable');
 	Route::resource('department', 'admin\DepartmentsController');
 
+	// For Program Route
+	Route::get('program/getDataTable','admin\ProgramsController@getDataTable');
 	Route::resource('program', 'admin\ProgramsController');
+
+	// For Classes Route
+	Route::get('classes/getDataTable','admin\ClassesController@getDataTable');
+	Route::resource('classes', 'admin\ClassesController');
 });

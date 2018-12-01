@@ -19,7 +19,8 @@ class DepartmentsController extends Controller
     public function index()
     {
         // $departments = Department::all();
-        return view('admin.templates.department.index');
+        return view('admin.templates.department.index')
+        ->with(['menu'=>'department']);
         // ->with(compact('departments'));
     }
 
@@ -54,16 +55,12 @@ class DepartmentsController extends Controller
             ->withInput();
         }
 
-        print_r($request->all());
+        // print_r($request->all());
 
         Department::create($request->all());
 
         return redirect()->route('department.index')
-                        // ->with('success','Department created successfully')
-        ->with(['menu'=>'role']);
-
-
-        // exit();
+            ->with(['menu'=>'department']);
     }
 
     /**
@@ -86,9 +83,9 @@ class DepartmentsController extends Controller
     public function edit($id)
     {
 
-        $department_edit = Department::findOrFail($id);
-        $departments = Department::all();
-        return view('admin.templates.department.index',compact(['department_edit','departments']));
+        // $department_edit = Department::findOrFail($id);
+        // $departments = Department::all();
+        // return view('admin.templates.department.index',compact(['department_edit','departments']));
     }
 
     /**
@@ -100,7 +97,19 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'department_name' => 'required|unique:departments|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            // print_r($validator);
+            // exit();
+            return redirect()->route('department.index')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        $update = Department::where('id',$id)->update(["department_name" => $request->department_name]);
+        return $update;
     }
 
     /**
@@ -111,7 +120,8 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        echo $id;
+        $delete = Department::destroy($id);
+        return $delete;
     }
 
     public function getDataTable()

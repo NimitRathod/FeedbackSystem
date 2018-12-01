@@ -11,3 +11,7 @@ https://itsolutionstuff.com/post/laravel-5-clear-cache-from-route-view-config-an
 		php artisan view:clear
 	5) Clear Config cache:
 		php artisan config:cache
+
+Key Generate
+	php artisan key:generate
+
