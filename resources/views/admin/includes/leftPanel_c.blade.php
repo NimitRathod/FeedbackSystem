@@ -2,12 +2,12 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow " data-scroll-to-active="true">
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-      <li class=" nav-item @if($menu == '') {{ 'active' }}@endif">
+      <!-- <li class=" nav-item @if($menu == '') {{ 'active' }}@endif">
         <a class="dropdown-item" href="{{ url('/admin') }} ">
           <i class="la la-home"></i>
           Dashboard
         </a>
-      </li>
+      </li> -->
       <li class=" navigation-header">
         <span data-i18n="nav.category.layouts">Academic</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
       </li>
@@ -50,8 +50,8 @@
           Role
         </a>
       </li>
-      <li class=" nav-item @if($menu == 'faculty') {{ 'active' }}@endif">
-        <a class="dropdown-item" href="{{ route('faculty.index') }}">
+      <li class=" nav-item @if($menu == 'fuculties') {{ 'active' }}@endif">
+        <a class="dropdown-item" href="#Fuculties">
           <i class="la la-group"></i>
           Fuculties
         </a>

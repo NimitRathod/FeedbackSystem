@@ -14,28 +14,27 @@
     <!-- END Custom CSS-->
     @yield('style')
 </head>
-{{-- <body class="vertical-layout vertical-compact-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns"> --}}
-    <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
-        @include('admin.includes.leftPanel')
+<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+@include('admin.includes.leftPanel')
 
-        <!-- Center Panel --> 
-        <div class="app-content content">
-            <div class="content-wrapper">
+    <!-- Center Panel --> 
+    <div class="app-content content">
+        <div class="content-wrapper">
 
-                @include('admin.includes.headerPanel')
+            @include('admin.includes.headerPanel')
 
 
-                @yield('content')
+            @yield('content')
 
-                <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-            </div>
         </div>
-        <!-- Center Panel -->
-        @include('admin.includes.footerPanel')
+    </div>
+    <!-- Center Panel -->
+    @include('admin.includes.footerPanel')
 
-        @include('admin.includes.scriptFile')
-        @yield('scriptFile')
-        @yield('footerScript')
-    </body>
-    </html>
+    @include('admin.includes.scriptFile')
+    @yield('scriptFile')
+    @yield('footerScript')
+</body>
+</html>

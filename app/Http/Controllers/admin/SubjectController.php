@@ -5,11 +5,11 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Model\Department;
+use App\Model\Subject;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 
-class DepartmentsController extends Controller
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,8 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
-        // $departments = Department::all();
-        return view('admin.templates.department.index')
-        ->with(['menu'=>'department']);
-        // ->with(compact('departments'));
+        return view('admin.templates.subject.view')
+        ->with(['menu'=>'subject']);
     }
 
     /**
@@ -42,25 +40,20 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        // print_r($request->all());
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required|unique:departments|max:255',
-        ]);
+            'subject_name' => 'required|unique:subjects|max:255',
+            ]);
 
         if ($validator->fails()) {
-            // print_r($validator);
-            // exit();
-            return redirect()->route('department.index')
+            return redirect()->route('subject.index')
             ->withErrors($validator)
             ->withInput();
         }
 
-        // print_r($request->all());
+        Subject::create($request->all());
 
-        Department::create($request->all());
-
-        return redirect()->route('department.index')
-            ->with(['menu'=>'department']);
+        return redirect()->route('subject.index')
+        ->with(['menu'=>'subject']);
     }
 
     /**
@@ -82,10 +75,7 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-
-        // $department_edit = Department::findOrFail($id);
-        // $departments = Department::all();
-        // return view('admin.templates.department.index',compact(['department_edit','departments']));
+        //
     }
 
     /**
@@ -98,15 +88,16 @@ class DepartmentsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required|unique:departments|max:255',
-        ]);
+            'subject_name' => 'required|unique:subjects|max:255',
+            ]);
 
         if ($validator->fails()) {
-            return redirect()->route('department.index')
+            return redirect()->route('subject.index')
             ->withErrors($validator)
             ->withInput();
         }
-        $update = Department::where('id',$id)->update(["department_name" => $request->department_name]);
+        
+        $update = Subject::where('id',$id)->update(["subject_name" => $request->subject_name]);
         return $update;
     }
 
@@ -118,19 +109,19 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Department::destroy($id);
+        $delete = Subject::destroy($id);
         return $delete;
     }
 
     public function getDataTable()
     {
-        $departments = Department::all();
-        return DataTables::of($departments)
-        ->addColumn('edit',function ($department){
-            return '<button type="button" class="edit btn btn-sm btn-primary" data-department-name="'.$department->department_name.'" data-id="'.$department->id.'">Edit</button>';
+        $subjects = Subject::all();
+        return DataTables::of($subjects)
+        ->addColumn('edit',function ($subject){
+            return '<button type="button" class="edit btn btn-sm btn-primary" data-subject-name="'.$subject->subject_name.'" data-id="'.$subject->id.'">Edit</button>';
         })
-        ->addColumn('delete',function ($department){
-            return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="'.$department->id.'" data-token="'.csrf_token().'" >Delete</button>';
+        ->addColumn('delete',function ($subject){
+            return '<button type="button" class="delete btn btn-sm btn-danger" data-delete-id="'.$subject->id.'" data-token="'.csrf_token().'" >Delete</button>';
         })
         ->rawColumns(['edit','delete'])
         ->make(true);

@@ -21,7 +21,7 @@ class ClassesController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return view('admin.templates.classes.index')
+        return view('admin.templates.classes.view')
         ->with(compact('programs'))
         ->with(['menu'=>'classes']);
     }
@@ -44,7 +44,7 @@ class ClassesController extends Controller
     */
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'class_name' => 'required|unique:classes|max:255',
             ]);
@@ -54,13 +54,13 @@ class ClassesController extends Controller
             ->withErrors($validator)
             ->withInput();
         }
-            
+
         Classes::create($request->all());
-            
+
         return redirect()->route('classes.index')
         ->with(['menu'=>'classes']);
     }
-        
+
         /**
         * Display the specified resource.
         *
@@ -92,9 +92,20 @@ class ClassesController extends Controller
         */
         public function update(Request $request, $id)
         {
-            //
+            $validator = Validator::make($request->all(), [
+                'class_name' => 'required|unique:classes|max:255',
+                ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('classes.index')
+                ->withErrors($validator)
+                ->withInput();
+            }
+
+            $update = Classes::where('id',$id)->update(["class_name" => $request->class_name]);
+            return $update;
         }
-        
+
         /**
         * Remove the specified resource from storage.
         *
@@ -103,7 +114,8 @@ class ClassesController extends Controller
         */
         public function destroy($id)
         {
-            //
+            $delete = Classes::destroy($id);
+            return $delete;
         }
         
         public function getDataTable()

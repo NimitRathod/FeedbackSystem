@@ -31,4 +31,12 @@ Route::group(['prefix' => 'admin'],function(){
 	// For Classes Route
 	Route::get('classes/getDataTable','admin\ClassesController@getDataTable');
 	Route::resource('classes', 'admin\ClassesController');
+	
+	// For Classes Route
+	Route::get('subject/getDataTable','admin\SubjectController@getDataTable');
+	Route::resource('subject', 'admin\SubjectController');
+
+	// For Classes Route
+	Route::get('faculty/getDataTable','admin\FacultiesController@getDataTable');
+	Route::resource('faculty', 'admin\FacultiesController');
 });
