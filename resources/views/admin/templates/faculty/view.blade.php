@@ -30,7 +30,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        {{-- <h4 class="card-title">Configuration option</h4> --}}
                         <div class="col-md-2 col-sm-2 col-4 "> 
                             <h5 class="card-title">
                                 <button class="btn btn-xs btn-block btn-outline-cyan mb-1 onblock-callback" data-toggle="modal" data-backdrop="false" data-target="#addmodel">
