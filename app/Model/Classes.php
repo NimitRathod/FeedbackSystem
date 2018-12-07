@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Feedback;
 
 class Classes extends Model
 {
@@ -16,7 +17,7 @@ class Classes extends Model
     ];
 
     public function feedbacks(){
-    	return $this->hasMany(Classes::class);
+    	return $this->hasMany(Feedback::class);
     }
 
 }

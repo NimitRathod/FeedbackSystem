@@ -122,8 +122,9 @@ class FeedbackController extends Controller
     // UDF (User Define Function)
     public function getDataTable()
     {
-        $feedbacks = Feedback::all();
-        // $feedbacks = Feedback::with('classes')->get();
+        // return $feedbacks = Feedback::all();
+        $feedbacks = Feedback::with(['class','faculty','subject','question'])->get();
+        // return $feedbacks->class_name;
         return DataTables::of($feedbacks)
         ->addColumn('edit',function ($feedback){
             return '<button type="button" class="edit btn btn-sm btn-primary" data-feedback="'.$feedback->facluty_id.'" data-que_set="'.$feedback->question_id.'" data-id="'.$feedback->id.'">Edit</button>';

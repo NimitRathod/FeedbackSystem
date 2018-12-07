@@ -49,6 +49,7 @@
                     <th>Faculty</th>
                     <th>Subject</th>
                     <th>Question</th>
+                    <th>Link</th>
                     <!-- <th width="100px;">Edit</th> -->
                     <th width="100px;">Delete</th>
                   </tr>
@@ -261,10 +262,11 @@
       "responsive": true,
       "ajax": "{{ url('admin/create_feedback/getDataTable') }}",
       columns: [
-      {data: "class_id"},
-      {data: "faculty_id"},
-      {data: "subject_id"},
-      {data: "question_id"},
+      {data: "class.class_name"},
+      {data: "faculty.faculty_fn"},
+      {data: "subject.subject_name"},
+      {data: "question.question"},
+      {data: "url"},
       // {data: "edit"},
       {data: "delete"}
       ]

@@ -4,6 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Classes;
+use App\Model\Faculties;
+use App\Model\Subject;
 use App\Model\Questions;
 
 class Feedback extends Model
@@ -12,11 +14,19 @@ class Feedback extends Model
     	'faculty_id', 'class_id', 'subject_id', 'question_id',
     ];
 
-    public function classes(){
+    public function class(){
     	return $this->belongsTo(Classes::class);
     }
 
-    public function questions(){
+    public function faculty(){
+    	return $this->belongsTo(Faculties::class);
+    }
+    
+    public function subject(){
+    	return $this->belongsTo(Subject::class);
+    }
+
+    public function question(){
     	return $this->belongsTo(Questions::class);
     }
 }
