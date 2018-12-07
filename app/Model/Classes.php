@@ -14,4 +14,9 @@ class Classes extends Model
     protected $hidden = [
         'remember_token',
     ];
+
+    public function feedbacks(){
+    	return $this->hasMany(Classes::class);
+    }
+
 }

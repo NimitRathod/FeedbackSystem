@@ -44,7 +44,7 @@ class FacultiesController extends Controller
             'faculty_fn' => 'required|max:255',
             'faculty_ln' => 'required|max:255',
             'email' => 'required|max:255',
-            'post' => 'required|max:255|unique:faculties',
+            'post' => 'required|max:255',
             'phone' => 'required|max:10',
             ]);
 
@@ -54,6 +54,7 @@ class FacultiesController extends Controller
             ->withInput();
         }
 
+        // return $request->all(); 
         Faculties::create($request->all());
 
         return redirect()->route('faculty.index')
@@ -76,7 +77,7 @@ class FacultiesController extends Controller
             'faculty_fn' => 'required|max:255',
             'faculty_ln' => 'required|max:255',
             'email' => 'required|max:255',
-            'post' => 'required|max:255|unique:faculties',
+            'post' => 'required|max:255',
             'phone' => 'required|max:10',
             ]);
 
@@ -104,6 +105,7 @@ class FacultiesController extends Controller
         return $delete;
     }
 
+    // UDF (User Define Function)
     public function getDataTable()
     {
         $faculties = Faculties::all();

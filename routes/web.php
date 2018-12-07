@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', function () {
+	// return env('APP_KEY')."123"; 
 	return view('student.templates.child');
 });
 
@@ -39,4 +40,12 @@ Route::group(['prefix' => 'admin'],function(){
 	// For Classes Route
 	Route::get('faculty/getDataTable','admin\FacultiesController@getDataTable');
 	Route::resource('faculty', 'admin\FacultiesController');
+
+	// For Classes Route
+	Route::get('question/getDataTable','admin\QuestionController@getDataTable');
+	Route::resource('question', 'admin\QuestionController');
+
+	// For Classes Route
+	Route::get('create_feedback/getDataTable','admin\FeedbackController@getDataTable');
+	Route::resource('create_feedback', 'admin\FeedbackController');
 });

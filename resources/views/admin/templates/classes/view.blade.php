@@ -166,9 +166,10 @@
 <!-- END PAGE VENDOR JS-->
 
 <!-- BEGIN PAGE LEVEL JS-->
-<script src="{{ asset('app-assets/js/scripts/forms/validation/jquery.validate.min.js')}}" type="text/javascript"></script>
+<!-- <script src="{{ asset('app-assets/js/scripts/forms/validation/jquery.validate.min.js')}}" type="text/javascript"></script>
 <script src="../../../app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
-<script src="../../../app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
+<script src="../../../app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script> -->
+
 <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL JS-->

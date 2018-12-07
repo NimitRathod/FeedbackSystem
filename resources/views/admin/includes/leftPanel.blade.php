@@ -56,6 +56,18 @@
           Fuculties
         </a>
       </li>
+      <li class=" nav-item @if($menu == 'question') {{ 'active' }}@endif">
+        <a class="dropdown-item" href="{{ route('question.index') }}">
+          <i class="la la-question"></i>
+          Question
+        </a>
+      </li>
+      <li class=" nav-item @if($menu == 'create_feedback') {{ 'active' }}@endif">
+        <a class="dropdown-item" href="{{ route('create_feedback.index') }}">
+          <i class="la la-comments"></i>
+          Create Feedback
+        </a>
+      </li>
     </ul>
   </div>
 </div>

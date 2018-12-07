@@ -37,15 +37,14 @@
                                     Add    
                                 </button>
                             </h5>
-                        </div>
+                        </div>  
                     </div>
                     <div class="card-content collapse show">
                         <div class="card-body  card-dashboard">
                             <table class="table table-striped table-bordered dynamic-table">
                                 <thead>
                                     <tr>
-                                        <th>Faculty Name</th>
-                                        <th>Email</th>
+                                        <th>Questions</th>
                                         <th width="100px;">Edit</th>
                                         <th width="100px;">Delete</th>
                                     </tr>
@@ -62,43 +61,19 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content border-cyan">
                 <div class="modal-header bg-cyan white">
-                    <h4 class="modal-title white" id="myModalLabel8">Add Faculty</h4>
+                    <h4 class="modal-title white" id="myModalLabel8">Add Question</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form method="POST" action="/admin/faculty" id="formAdd" enctype="multipart/form-data">
+                <form method="POST" action="/admin/question" id="formAdd" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Faculty First Name: </label>
+                            <label>Question: </label>
                             <div class="form-group position-relative has-icon-left">
-                                <input type="text" name="faculty_fn" placeholder="Faculty First Name" class="form-control" value="" autofocus="false">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Faculty Last Name: </label>
-                            <div class="form-group position-relative has-icon-left">
-                                <input type="text" name="faculty_ln" placeholder="Faculty Last Name" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Faculty Email: </label>
-                            <div class="form-group position-relative has-icon-left">
-                                <input type="email" name="email" placeholder="Faculty Email" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone: </label>
-                            <div class="form-group position-relative has-icon-left">
-                                <input type="text" name="phone" placeholder="Faculty Phone" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Post: </label>
-                            <div class="form-group position-relative has-icon-left">
-                                <input type="text" name="post" placeholder="Faculty Post" class="form-control" value="">
+                                <input type="text" name="question" placeholder="Enter Questions" class="form-control" value="" autofocus="false">
                             </div>
                         </div>
                     </div>
@@ -116,7 +91,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content border-primary">
                 <div class="modal-header bg-primary white">
-                    <h4 class="modal-title white" id="myModalLabel8">Update Faculty Name</h4>
+                <h4 class="modal-title white" id="myModalLabel8">Update Question</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -127,45 +102,21 @@
                     <input type="hidden" name="_method" value="PATCH">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Faculty First Name: </label>
+                            <label>Question: </label>
                             <div class="form-group position-relative has-icon-left">
-                                <input type="text" id="faculty_fn" name="faculty_fn" placeholder="Faculty First Name" class="form-control" value="" autofocus="false">
+                                <input type="text" id="question" name="question" placeholder="Enter Questions" class="form-control" value="" autofocus="false">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Faculty Last Name: </label>
-                            <div class="form-group position-relative has-icon-left">
-                                <input type="text" id="faculty_ln" name="faculty_ln" placeholder="Faculty Last Name" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                         <label>Faculty Email: </label>
-                         <div class="form-group position-relative has-icon-left">
-                            <input type="email" id="email" name="email" placeholder="Faculty Email" class="form-control" value="">
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Phone: </label>
-                        <div class="form-group position-relative has-icon-left">
-                            <input type="text" id="phone" name="phone" placeholder="Faculty Phone" class="form-control" value="">
-                        </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        <input type="submit" class="btn btn-outline-primary" value="Update">
                     </div>
-                    <div class="form-group">
-                        <label>Post: </label>
-                        <div class="form-group position-relative has-icon-left">
-                            <input type="text" id="post" name="post" placeholder="Faculty Post" class="form-control" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                    <input type="submit" class="btn btn-outline-primary" value="Update">
-                </div>
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 
@@ -221,7 +172,7 @@
             if (isConfirm) {
                 $.ajax(
                 {
-                    url: "/admin/faculty/" + id,
+                    url: "/admin/question/" + id,
                     type: 'POST',
                     data: {
                         "id": id,
@@ -247,14 +198,10 @@
     $(document).on('click', '.edit', function () {
 
         var id = $(this).data("id");
-        var faculty_fn = $(this).data("faculty-name");
+        var question_up = $(this).data("question");
 
-        $('#editform #faculty_fn').val(faculty_fn);
-        $('#editform #faculty_ln').val($(this).data("faculty-ln"));
-        $('#editform #email').val($(this).data("email"));
-        $('#editform #phone').val($(this).data("phone"));
-        $('#editform #post').val($(this).data("post"));
-        $('#editform').attr('action', '/admin/faculty/' + id);
+        $('#editform #question').val(question_up);
+        $('#editform').attr('action', '/admin/question/' + id);
         $('#editmodel').modal('show');
     });
 
@@ -263,10 +210,9 @@
             "processing": true,
             "serverSide": true,
             "responsive": true,
-            "ajax": "{{ url('admin/faculty/getDataTable') }}",
+            "ajax": "{{ url('admin/question/getDataTable') }}",
             columns: [
-            {data: "faculty_fn"},
-            {data: "email"},
+            {data: "question"},
             {data: "edit"},
             {data: "delete"}
             ]
